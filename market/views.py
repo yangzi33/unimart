@@ -19,5 +19,40 @@ class PostListView(ListView):
 	ordering = ['-date_posted']
 
 
+class PostDetailView(DetailView):
+	model = Post
+
+
+class PostCreateView(LoginRequiredMixin, CreateView):
+	model = Post
+	fields = ['title']
+
+	def form_valid(self, form):
+		form.instance.owner = self.self.request.user
+		return super().form_valid(form)
+
+
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+	model = Post
+	fields = ['title', 'content']
+
+	def form_valid(self, form):
+		form.instance.owner = self.request.user
+		return super().form_valid(form)
+
+	def test_func(self):
+		post = self.get_object()
+		return self.request.user == post.owner
+
+
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+	model = Post
+	success_url = '/'
+
+	def test_func(self):
+		post = self.get_object()
+		return self.request.user == post.owner
+
+
 def about(request):
-	return render(request, 'about.html', context)
+	return render(request, 'about.html', {'title': 'About'})
