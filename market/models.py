@@ -8,8 +8,9 @@ class Post(models.Model):
 	title = models.CharField(max_length=100)
 	# TODO: add ImageField that allows multiple 
 	# images upload 
+	short_description = models.TextField(max_length=100)
 	description = models.TextField()
-	date_listed = models.DateTimeField(default=timezone.now)
+	date_posted = models.DateTimeField(default=timezone.now)
 	seller = models.ForeignKey(User, on_delete=models.CASCADE)
 	# requires modifications 
 	location = models.CharField(max_length=100)
