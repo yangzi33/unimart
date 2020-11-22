@@ -9,7 +9,7 @@
                     <small class="text-muted">{{ post.location }}</small>
                     <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
                 </div>
-                <!-- <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2> -->
+                <h2><a class="article-title" href="{% url 'post-description' post.id %}">{{ post.title }}</a></h2>
                 {{ post.title }}
                 <p class="article-content">{{ post.short_description }}</p>
             </div>
