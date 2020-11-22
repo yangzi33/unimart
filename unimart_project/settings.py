@@ -139,3 +139,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Redirect to home after loggin in
 LOGIN_REDIRECT_URL = 'market-home'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+}
